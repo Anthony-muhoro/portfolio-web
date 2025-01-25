@@ -1,4 +1,4 @@
-import { Facebook, Github, Linkedin, WhatsApp } from "lucide-react";
+import { Facebook, Github, Linkedin, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Footer = () => {
@@ -28,7 +28,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
-              <WhatsApp className="h-6 w-6" />
+              <MessageCircle className="h-6 w-6" />
             </a>
             <a
               href="https://linkedin.com"
