@@ -29,7 +29,7 @@
   }
 
   * {
-    @apply border-border;
+    @apply border-border scroll-smooth;
   }
 
   body {
@@ -55,4 +55,8 @@
 
 .hover-card {
   @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+}
+
+html {
+  scroll-behavior: smooth;
 }

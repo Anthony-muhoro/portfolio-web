@@ -1,18 +1,47 @@
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   const navItems = [
-    { name: "Home", href: "#" },
+    { name: "Home", href: "#home" },
     { name: "Projects", href: "#projects" },
     { name: "Skills", href: "#skills" },
     { name: "Services", href: "#services" },
     { name: "Contact", href: "#contact" },
   ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll("section[id]");
+      const scrollPosition = window.scrollY + 100;
+
+      sections.forEach((section) => {
+        const sectionTop = (section as HTMLElement).offsetTop;
+        const sectionHeight = section.clientHeight;
+        const sectionId = section.getAttribute("id") || "";
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          setActiveSection(sectionId);
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToSection = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setIsOpen(false);
+    }
+  };
 
   return (
     <motion.nav
@@ -33,17 +62,21 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                onClick={() => scrollToSection(item.href)}
+                className={`${
+                  activeSection === item.href.substring(1)
+                    ? "text-foreground font-medium"
+                    : "text-muted-foreground"
+                } hover:text-foreground transition-colors`}
               >
                 {item.name}
-              </a>
+              </button>
             ))}
           </div>
 
-          {/* Mobile Navigation */}
+          {/* Mobile Navigation Toggle */}
           <div className="md:hidden">
             <Button
               variant="ghost"
@@ -57,25 +90,30 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu */}
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden py-4"
-          >
+        <motion.div
+          initial={{ x: "-100%" }}
+          animate={{ x: isOpen ? 0 : "-100%" }}
+          transition={{ type: "spring", stiffness: 100 }}
+          className={`md:hidden fixed top-16 left-0 right-0 bottom-0 bg-background border-r p-4 ${
+            isOpen ? "block" : "hidden"
+          }`}
+        >
+          <div className="flex flex-col space-y-4">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
-                className="block py-2 text-muted-foreground hover:text-foreground transition-colors"
-                onClick={() => setIsOpen(false)}
+                onClick={() => scrollToSection(item.href)}
+                className={`${
+                  activeSection === item.href.substring(1)
+                    ? "text-foreground font-medium"
+                    : "text-muted-foreground"
+                } hover:text-foreground transition-colors text-left py-2`}
               >
                 {item.name}
-              </a>
+              </button>
             ))}
-          </motion.div>
-        )}
+          </div>
+        </motion.div>
       </div>
     </motion.nav>
   );
