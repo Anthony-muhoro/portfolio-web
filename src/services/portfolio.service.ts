@@ -1,15 +1,6 @@
 import { databases, storage } from '@/lib/appwrite';
 import { ID } from 'appwrite';
-import nodemailer from 'nodemailer';
-
-// Email configuration
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'your-email@gmail.com',
-    pass: 'your-app-specific-password'
-  }
-});
+import emailjs from '@emailjs/browser';
 
 export interface HeroData {
   title: string;
@@ -109,7 +100,7 @@ export const portfolioService = {
     }
   },
 
-  // Contact Form Submission with Auto-reply
+  // Contact Form Submission with EmailJS
   async submitContact(data: ContactData) {
     try {
       // Save to Appwrite
@@ -120,13 +111,18 @@ export const portfolioService = {
         data
       );
 
-      // Send auto-reply email
-      await transporter.sendMail({
-        from: 'your-email@gmail.com',
-        to: data.email,
-        subject: 'Thank you for contacting me!',
-        text: `Dear visitor,\n\nThank you for reaching out. I have received your message and will get back to you as soon as possible.\n\nBest regards,\nYour Name`
-      });
+      // Send email using EmailJS
+      await emailjs.send(
+        'YOUR_SERVICE_ID', // EmailJS service ID
+        'YOUR_TEMPLATE_ID', // EmailJS template ID
+        {
+          to_email: data.email,
+          message: data.message,
+          from_name: 'Your Portfolio',
+          reply_to: 'your-email@example.com',
+        },
+        'YOUR_PUBLIC_KEY' // EmailJS public key
+      );
 
       return response;
     } catch (error) {
