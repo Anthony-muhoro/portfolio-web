@@ -3,9 +3,48 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MessageSquare, Phone } from "lucide-react";
+import { Mail, MessageCircle, Phone } from "lucide-react";
+import { portfolioService } from "@/services/portfolio.service";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 const Contact = () => {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      await portfolioService.submitContact({
+        email: formData.email,
+        message: formData.message,
+        phone: "" // Optional
+      });
+
+      toast({
+        title: "Message sent!",
+        description: "Thank you for your message. I'll get back to you soon.",
+      });
+
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="section-padding">
       <div className="max-w-6xl mx-auto">
@@ -45,7 +84,7 @@ const Contact = () => {
                   <span>+1 (555) 123-4567</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <MessageSquare className="w-5 h-5 text-muted-foreground" />
+                  <MessageCircle className="w-5 h-5 text-muted-foreground" />
                   <span>Schedule a call</span>
                 </div>
               </CardContent>
@@ -64,17 +103,33 @@ const Contact = () => {
                 <CardDescription>I'll get back to you as soon as possible</CardDescription>
               </CardHeader>
               <CardContent>
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
-                    <Input placeholder="Your Name" />
+                    <Input 
+                      placeholder="Your Name"
+                      value={formData.name}
+                      onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                    />
                   </div>
                   <div className="space-y-2">
-                    <Input type="email" placeholder="Your Email" />
+                    <Input 
+                      type="email" 
+                      placeholder="Your Email"
+                      value={formData.email}
+                      onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                    />
                   </div>
                   <div className="space-y-2">
-                    <Textarea placeholder="Your Message" className="min-h-[120px]" />
+                    <Textarea 
+                      placeholder="Your Message" 
+                      className="min-h-[120px]"
+                      value={formData.message}
+                      onChange={(e) => setFormData(prev => ({ ...prev, message: e.target.value }))}
+                    />
                   </div>
-                  <Button className="w-full">Send Message</Button>
+                  <Button className="w-full" type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? "Sending..." : "Send Message"}
+                  </Button>
                 </form>
               </CardContent>
             </Card>
