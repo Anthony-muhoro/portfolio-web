@@ -7,7 +7,7 @@ import { Mail, MessageSquare, Phone } from "lucide-react";
 
 const Contact = () => {
   return (
-    <section className="section-padding">
+    <section id="contact" className="section-padding">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
