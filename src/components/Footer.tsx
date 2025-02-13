@@ -53,7 +53,7 @@ const Footer = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-sm text-muted-foreground"
           >
-            © {currentYear} Portfolio. All rights reserved.
+            © {currentYear} Muhoro. All rights reserved.
           </motion.p>
         </div>
       </div>

@@ -6,26 +6,26 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
+    --background: 240 10% 10%; /* Dark background */
+    --foreground: 210 20% 98%; /* Light text for contrast */
+    --card: 240 10% 15%; /* Slightly lighter dark card background */
+    --card-foreground: 210 20% 98%; /* Light text for cards */
+    --popover: 240 10% 15%; /* Popover background */
+    --popover-foreground: 210 20% 98%; /* Light text for popovers */
+    --primary: 217 91% 60%; /* Bright blue for primary actions */
+    --primary-foreground: 210 20% 98%; /* Light text for primary buttons */
+    --secondary: 240 10% 20%; /* Darker secondary elements */
+    --secondary-foreground: 210 20% 98%; /* Light text for secondary elements */
+    --muted: 240 10% 25%; /* Muted dark background */
+    --muted-foreground: 210 20% 70%; /* Muted light text */
+    --accent: 217 91% 60%; /* Bright blue for accents */
+    --accent-foreground: 210 20% 98%; /* Light text for accents */
+    --destructive: 0 84% 60%; /* Red for destructive actions */
+    --destructive-foreground: 210 20% 98%; /* Light text for destructive actions */
+    --border: 240 10% 25%; /* Dark border color */
+    --input: 240 10% 25%; /* Dark input background */
+    --ring: 217 91% 60%; /* Bright blue for focus rings */
+    --radius: 0.5rem; /* Border radius */
   }
 
   * {

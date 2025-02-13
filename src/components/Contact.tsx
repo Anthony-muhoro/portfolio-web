@@ -20,25 +20,32 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
+  
     try {
-      await portfolioService.submitContact({
-        email: formData.email,
-        message: formData.message,
-        phone: "" // Optional
+      // Send form data to the backend
+      const response = await fetch("https://portfolio-server-1-sibc.onrender.com/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
-
+  
+      if (!response.ok) {
+        throw new Error("Failed to send message.");
+      }
+  
       toast({
         title: "Message sent!",
-        description: "Thank you for your message. I'll get back to you soon.",
+        description: "Thank you for your message. You will receive an email confirmation shortly.",
       });
-
+  
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       toast({
         title: "Error",
         description: "Failed to send message. Please try again.",
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
@@ -77,11 +84,11 @@ const Contact = () => {
               <CardContent className="space-y-6">
                 <div className="flex items-center gap-4">
                   <Mail className="w-5 h-5 text-muted-foreground" />
-                  <span>hello@example.com</span>
+                  <span>anthonymuhoro7@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-4">
                   <Phone className="w-5 h-5 text-muted-foreground" />
-                  <span>+1 (555) 123-4567</span>
+                  <span>+254 706 471 469</span>
                 </div>
                 <div className="flex items-center gap-4">
                   <MessageCircle className="w-5 h-5 text-muted-foreground" />

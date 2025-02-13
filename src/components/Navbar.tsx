@@ -54,7 +54,7 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b"
+      className="fixed top-0 left-0 right-0 z-50 bg-[#180E41] backdrop-blur-md border-b"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -63,7 +63,8 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             className="text-xl font-bold"
           >
-            Portfolio
+           <img src="https://res.cloudinary.com/dyzssa40e/image/upload/v1739051178/logo_igin2b.png" alt="Muhoro" className="sm:w-150" width={200} height={70} />
+
           </motion.span>
 
           {/* Desktop Navigation */}
@@ -91,7 +92,7 @@ const Navbar = () => {
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-12 w-12 text-white " />}
             </Button>
           </div>
         </div>
@@ -105,14 +106,14 @@ const Navbar = () => {
             isOpen ? "block" : "hidden"
           }`}
         >
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col space-y-4 bg-[#180E41] p-4">
             {navItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
                 className={`${
                   activeSection === item.href.substring(1)
-                    ? "text-foreground font-medium"
+                    ? "text-white font-medium"
                     : "text-muted-foreground"
                 } hover:text-foreground transition-colors text-left py-2`}
               >

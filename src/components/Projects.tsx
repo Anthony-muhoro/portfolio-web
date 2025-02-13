@@ -3,38 +3,108 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Github, ExternalLink } from "lucide-react";
+import { useState } from "react";
+import { Pagination, PaginationContent, PaginationItem, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
 const projects = [
   {
     title: "Project One",
-    description: "A modern web application built with React and Node.js",
+    description: "A modern Dashboard built with React and Node.js",
     tags: ["React", "Node.js", "TypeScript"],
-    image: "/placeholder.svg",
+    image: "https://via.placeholder.com/400x200", // Replace with actual image URL
     liveUrl: "https://project1.com",
-    githubUrl: "https://github.com/username/project1"
+    githubUrl: "https://github.com/username/project1",
   },
   {
-    title: "Project Two",
+    title: "E-commerce Website",
     description: "Mobile-first e-commerce platform",
     tags: ["Next.js", "Tailwind CSS", "PostgreSQL"],
-    image: "/placeholder.svg",
+    image: "https://via.placeholder.com/400x200", // Replace with actual image URL
     liveUrl: "https://project2.com",
-    githubUrl: "https://github.com/username/project2"
+    githubUrl: "https://github.com/username/project2",
   },
   {
-    title: "Project Three",
+    title: "Medical Web App",
     description: "Real-time collaboration tool",
     tags: ["React", "Socket.io", "Express"],
-    image: "/placeholder.svg",
+    image: "https://via.placeholder.com/400x200", // Replace with actual image URL
     liveUrl: "https://project3.com",
-    githubUrl: "https://github.com/username/project3"
-  }
+    githubUrl: "https://github.com/username/project3",
+  },
+  {
+    title: "Portfolio Website",
+    description: "Personal portfolio showcasing projects",
+    tags: ["React", "Tailwind CSS", "Framer Motion"],
+    image: "https://via.placeholder.com/400x200", // Replace with actual image URL
+    liveUrl: "https://project4.com",
+    githubUrl: "https://github.com/username/project4",
+  },
+  {
+    title: "Task Management App",
+    description: "Kanban-style task management tool",
+    tags: ["React", "Firebase", "Material UI"],
+    image: "https://via.placeholder.com/400x200", // Replace with actual image URL
+    liveUrl: "https://project5.com",
+    githubUrl: "https://github.com/username/project5",
+  },
+  {
+    title: "Blog Platform",
+    description: "Markdown-based blog platform",
+    tags: ["Next.js", "GraphQL", "Tailwind CSS"],
+    image: "https://via.placeholder.com/400x200", // Replace with actual image URL
+    liveUrl: "https://project6.com",
+    githubUrl: "https://github.com/username/project6",
+  },
+  {
+    title: "AI Chatbot",
+    description: "AI-powered chatbot for customer support",
+    tags: ["Python", "TensorFlow", "Flask"],
+    image: "https://via.placeholder.com/400x200", // Replace with actual image URL
+    liveUrl: "https://project7.com",
+    githubUrl: "https://github.com/username/project7",
+  },
 ];
 
 const Projects = () => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const projectsPerPage = 3;
+
+  // Pagination logic
+  const totalPages = Math.ceil(projects.length / projectsPerPage);
+  const startIndex = currentPage * projectsPerPage;
+  const endIndex = startIndex + projectsPerPage;
+  const currentProjects = projects.slice(startIndex, endIndex);
+
+  const handleNext = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 0) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  };
+
   return (
-    <section id="projects" className="section-padding bg-secondary/30">
-      <div className="max-w-6xl mx-auto">
+    <section id="projects" className="section-padding bg-secondary/30 relative overflow-hidden">
+      {/* Moving Blue Light Effect */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          initial={{ x: -100, y: -100 }}
+          animate={{ x: "100vw", y: "100vh" }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "linear",
+          }}
+          className="w-48 h-48 bg-blue-500/20 blur-3xl rounded-full"
+        />
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -48,16 +118,19 @@ const Projects = () => {
             A collection of projects that showcase my expertise in building modern web applications
           </p>
         </motion.div>
+
+        {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {currentProjects.map((project, index) => (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
+              className="relative"
             >
-              <Card className="hover-card overflow-hidden">
+              <Card className="hover-card overflow-hidden bg-background/50 backdrop-blur-md relative z-10">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -93,6 +166,39 @@ const Projects = () => {
               </Card>
             </motion.div>
           ))}
+        </div>
+
+        {/* Shadcn Pagination */}
+        <div className="flex justify-center mt-8">
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <Button
+                  variant="ghost"
+                  onClick={handlePrev}
+                  disabled={currentPage === 0}
+                  className={currentPage === 0 ? "opacity-50 cursor-not-allowed" : ""}
+                >
+                  Previous
+                </Button>
+              </PaginationItem>
+              <PaginationItem>
+                <span className="text-sm">
+                  Page {currentPage + 1} of {totalPages}
+                </span>
+              </PaginationItem>
+              <PaginationItem>
+                <Button
+                  variant="ghost"
+                  onClick={handleNext}
+                  disabled={currentPage === totalPages - 1}
+                  className={currentPage === totalPages - 1 ? "opacity-50 cursor-not-allowed" : ""}
+                >
+                  Next
+                </Button>
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
         </div>
       </div>
     </section>
