@@ -1,69 +1,98 @@
-# Welcome to your Lovable project
 
-## Project info
+# Portfolio Project
 
-**URL**: https://lovable.dev/projects/ba314822-faeb-4ace-8eee-710599cd465d
+Welcome to my portfolio! This project is a showcase of my work and skills, built with modern web technologies.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## Table of Contents
 
-**Use Lovable**
+- [Project Info](#project-info)
+- [Technologies Used](#technologies-used)
+- [How to Clone and Run the Project](#how-to-clone-and-run-the-project)
+- [How to Contribute](#how-to-contribute)
+- [Deployment](#deployment)
+- [License](#license)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ba314822-faeb-4ace-8eee-710599cd465d) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## Project Info
 
-**Use your preferred IDE**
+This is a personal portfolio project to showcase my skills, experience, and projects. The portfolio is built with modern web technologies, providing an interactive and visually appealing interface.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+**URL**: [Your Portfolio URL](<YOUR_PROJECT_URL>)
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## Technologies Used
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+This project is built using the following technologies:
 
-# Step 2: Navigate to the project directory.
+- **Vite** – A fast build tool and development server
+- **TypeScript** – A superset of JavaScript that adds static types
+- **React** – A JavaScript library for building user interfaces
+- **shadcn-ui** – A UI component library
+- **Tailwind CSS** – A utility-first CSS framework for rapid UI development
+
+---
+
+## How to Clone and Run the Project
+
+To clone and run this project on your local machine, follow these steps:
+
+### Step 1: Clone the Repository
+
+Clone the project repository to your local machine by running:
+
+```bash
+git clone https://github.com/Anthony-muhoro/portfolio-web.git
+```
+
+
+### Step 2: Install Dependencies
+
+Navigate to the project directory and install the necessary dependencies:
+
+```bash
 cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
 npm i
+```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### Step 3: Run the Development Server
+
+Start the development server to preview the portfolio locally:
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+This will start the server at `http://localhost:3000` (or another port if specified).
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## How to Contribute
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Contributions are welcome! If you'd like to contribute to the project, follow these steps:
 
-## What technologies are used for this project?
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add new feature'`).
+5. Push to your forked repository (`git push origin feature-branch`).
+6. Open a pull request with a detailed description of your changes.
 
-This project is built with .
+---
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Deployment
 
-## How can I deploy this project?
+You can deploy the project using services like [Netlify](https://www.netlify.com/) or [Vercel](https://vercel.com/). For more detailed instructions, please refer to the official documentation of these services.
 
-Simply open [Lovable](https://lovable.dev/projects/ba314822-faeb-4ace-8eee-710599cd465d) and click on Share -> Publish.
+---
 
-## I want to use a custom domain - is that possible?
+## License
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
+
+---
+
+Let me know if you need to make any changes or add anything else to the README!
